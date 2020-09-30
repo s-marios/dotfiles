@@ -5,12 +5,15 @@
 :filetype plugin indent on
 :autocmd FileType go setlocal tabstop=4
 
+"hide buffers for easier navigation
+set hidden
+
 "ale config
 let g:ale_completion_enabled = 1
 let g:ale_linters = {'rust': ['analyzer', 'cargo']}
 
 "go to definition
-nmap gd :ALEGoToDefinition -vsplit<CR>
+nmap gd :ALEGoToDefinition<CR>
 "find references
 nmap gr :ALEFindReferences<CR>
 "hover
