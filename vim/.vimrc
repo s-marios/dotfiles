@@ -1,4 +1,3 @@
-":set mouse=r
 syntax on
 filetype on
 filetype plugin on
@@ -13,25 +12,36 @@ set hidden
 """ mkdir -p ~/.vim/pack/git-plugins/start
 """ git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale
 
-let g:ale_completion_enabled = 1
+"completion and rust analyzer
+let g:ale_completion_enabled=1
 let g:ale_linters = {'rust': ['analyzer', 'cargo']}
 
 "go to definition
-nmap gd :ALEGoToDefinition<CR>
+nmap gd <Plug>(ale_go_to_definition)
+
 "find references
-nmap gr :ALEFindReferences<CR>
+nmap gr <Plug>(ale_find_references)
 "hover
 let g:ale_set_balloons=1
-nmap K :ALEHover<CR>
+nnoremap K :ALEHover<CR>
 "completion
 let g:ale_completion_enabled=1
 set omnifunc=ale#completion#OmniFunc
+
+
+"curstor hint
+let g:ale_cursor_detail=1
 
 "previews close on insert
 let g:ale_close_preview_on_insert=1
 
 "integrate with airline
 let g:airline#extensions#ale#enabled = 1
+"
+"moving to prev/next errors with wrapping
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 
 """airline stuff
 """getting it
