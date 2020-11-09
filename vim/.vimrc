@@ -15,6 +15,7 @@ set hidden
 "completion and rust analyzer
 let g:ale_completion_enabled=1
 let g:ale_linters = {'rust': ['analyzer', 'cargo']}
+let g:ale_rust_cargo_use_clippy = 1
 
 "go to definition
 nmap gd <Plug>(ale_go_to_definition)
@@ -47,6 +48,13 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 """getting it
 """ git clone https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-airline
 let g:airline#extensions#tabline#enabled = 1
+
+""" fugitive for git branch
+"mkdir -p ~/.vim/pack/tpope/start
+"cd ~/.vim/pack/tpope/start
+"git clone https://tpope.io/vim/fugitive.git
+"vim -u NONE -c "helptags fugitive/doc" -c q
+
 
 packloadall
 silent! helptags ALL
