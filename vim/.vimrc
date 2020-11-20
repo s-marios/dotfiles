@@ -22,16 +22,21 @@ nmap gd <Plug>(ale_go_to_definition)
 
 "find references
 nmap gr <Plug>(ale_find_references)
-"hover
-let g:ale_set_balloons=1
-nnoremap K :ALEHover<CR>
+
+"auto hover
+let g:ale_hover_cursor = 1
+"..after 1 sec
+set updatetime=1000
+
 "completion
 let g:ale_completion_enabled=1
 set omnifunc=ale#completion#OmniFunc
 
-
-"curstor hint
-let g:ale_cursor_detail=1
+"don't show details on cursor
+let g:ale_cursor_detail=0
+"instead, use K to show details on the preview window
+"(press q when you're done with it to go back to your buffer)
+nmap K <Plug>(ale_detail)
 
 "previews close on insert
 let g:ale_close_preview_on_insert=1
