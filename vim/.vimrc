@@ -17,6 +17,9 @@ let g:ale_completion_enabled=1
 let g:ale_linters = {'rust': ['analyzer', 'cargo']}
 let g:ale_rust_cargo_use_clippy = 1
 
+"keep highlights from messing up code visibility, but still have gutter indicators
+let g:ale_set_highlights = 0
+
 "go to definition
 nmap gd <Plug>(ale_go_to_definition)
 
