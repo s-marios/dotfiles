@@ -14,11 +14,18 @@ set hidden
 
 "completion and rust analyzer
 let g:ale_completion_enabled=1
-let g:ale_linters = {'rust': ['analyzer', 'cargo']}
+let g:ale_linters = {'rust': ['analyzer', 'cargo'], 'python': ['pyls']}
+let g:ale_fixers = {'rust': ['rustfmt'], 'python': ['yapf']}
 let g:ale_rust_cargo_use_clippy = 1
 
 "keep highlights from messing up code visibility, but still have gutter indicators
 let g:ale_set_highlights = 0
+
+"get possible code actions
+nmap gA :ALECodeAction<Return>
+
+"call rustfmt as fixer/formatter
+nmap gF <Plug>(ale_fix)
 
 "go to definition
 nmap gd <Plug>(ale_go_to_definition)
