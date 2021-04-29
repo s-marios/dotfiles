@@ -12,10 +12,17 @@ set hidden
 """ mkdir -p ~/.vim/pack/git-plugins/start
 """ git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale
 
-"completion and rust analyzer
+"completion, rust & python linters/fixers
 let g:ale_completion_enabled=1
-let g:ale_linters = {'rust': ['analyzer', 'cargo'], 'python': ['pyls', 'flake8']}
-let g:ale_fixers = {'rust': ['rustfmt'], 'python': ['yapf', 'isort', 'autopep8']}
+let g:ale_linters = {
+\	'rust': ['analyzer', 'cargo'],
+\	'python': ['pyls', 'mypy', 'flake8']
+\}
+let g:ale_fixers = {
+\	'rust': ['rustfmt'],
+\	'python': ['yapf', 'isort', 'autopep8'],
+\	'*': ['trim_whitespace', 'remove_trailing_lines']
+\}
 let g:ale_rust_cargo_use_clippy = 1
 
 "python yapf executable
