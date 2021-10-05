@@ -20,13 +20,17 @@ let g:ale_linters = {
 \}
 let g:ale_fixers = {
 \	'rust': ['rustfmt'],
-\	'python': ['yapf', 'isort', 'autopep8'],
+\	'python': ['isort', 'autopep8'],
 \	'*': ['trim_whitespace', 'remove_trailing_lines']
 \}
 let g:ale_rust_cargo_use_clippy = 1
 
 "python yapf executable
 let g:ale_python_yapf_executable = 'yapf3'
+
+"python prefer hang indentation
+let g:ale_python_flake8_options = '--hang-closing'
+let g:ale_python_autopep8_options = '--hang-closing'
 
 "keep highlights from messing up code visibility, but still have gutter indicators
 let g:ale_set_highlights = 0
