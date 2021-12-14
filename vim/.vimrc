@@ -2,7 +2,9 @@ syntax on
 filetype on
 filetype plugin on
 filetype plugin indent on
-autocmd FileType go setlocal tabstop=4
+set tabstop=4
+set shiftwidth=4
+autocmd BufRead *.c set cindent
 
 "hide buffers for easier navigation
 set hidden
@@ -13,14 +15,16 @@ set hidden
 """ git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale
 
 "completion, rust & python linters/fixers
-let g:ale_completion_enabled=1
+let g:ale_completion_enabled = 1
 let g:ale_linters = {
 \	'rust': ['analyzer', 'cargo'],
-\	'python': ['pyls', 'mypy', 'flake8']
+\	'python': ['pyls', 'mypy', 'flake8'],
+\	'c': ['ccls', 'cc', 'cppcheck', 'flawfinder']
 \}
 let g:ale_fixers = {
 \	'rust': ['rustfmt'],
 \	'python': ['isort', 'autopep8'],
+\	'c': ['astyle'],
 \	'*': ['trim_whitespace', 'remove_trailing_lines']
 \}
 let g:ale_rust_cargo_use_clippy = 1
@@ -36,7 +40,7 @@ let g:ale_python_autopep8_options = '--hang-closing'
 let g:ale_set_highlights = 0
 
 "WIP get possible code actions
-nmap gA :ALECodeAction<Return>
+nmap gA <Plug>(ale_code_action)
 
 "call rustfmt as fixer/formatter
 nmap gF <Plug>(ale_fix)
