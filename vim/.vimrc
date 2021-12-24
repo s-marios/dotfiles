@@ -19,7 +19,7 @@ let g:ale_completion_enabled = 1
 let g:ale_linters = {
 \	'rust': ['analyzer', 'cargo'],
 \	'python': ['pyls', 'mypy', 'flake8'],
-\	'c': ['ccls', 'cc', 'cppcheck', 'flawfinder']
+\	'c': ['clangd', 'ccls', 'cc', 'cppcheck', 'flawfinder']
 \}
 let g:ale_fixers = {
 \	'rust': ['rustfmt'],
