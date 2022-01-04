@@ -14,6 +14,12 @@ set hidden
 """ mkdir -p ~/.vim/pack/git-plugins/start
 """ git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale
 
+"add import for external modules
+let g:ale_completion_autoimport = 1
+
+"dry-run make to discover compiler flags
+let g:ale_c_parse_makefile = 1
+
 "completion, rust & python linters/fixers
 let g:ale_completion_enabled = 1
 let g:ale_linters = {
