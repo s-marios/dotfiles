@@ -9,17 +9,32 @@ autocmd BufRead *.c set cindent
 "hide buffers for easier navigation
 set hidden
 
+""" Tex-related configuration
+"write-good configuration
+let g:ale_writegood_options = "--no-passive --no-tooWordy"
+"disable highligh of math regions, enable all other
+let g:tex_fast="bcmprsSvV"
+
 """ ALE Lint & Autocompletion
 """ getting it
 """ mkdir -p ~/.vim/pack/git-plugins/start
 """ git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale
 
 "completion, rust & python linters/fixers
+"\	'c': ['clangd', 'ccls', 'cc', 'cppcheck', 'flawfinder']
+"messing with clangd
+let g:ale_c_clangd_executable = "clangd-13"
 let g:ale_completion_enabled = 1
+
+"disable lacheck because it detects $ inside lstlistings
+let g:ale_linters_ignore = {
+\	'tex': ['lacheck']
+\}
+
 let g:ale_linters = {
 \	'rust': ['analyzer', 'cargo'],
 \	'python': ['pyls', 'mypy', 'flake8'],
-\	'c': ['clangd', 'ccls', 'cc', 'cppcheck', 'flawfinder']
+\	'c': ['clangd', 'cc', 'cppcheck', 'flawfinder']
 \}
 let g:ale_fixers = {
 \	'rust': ['rustfmt'],
@@ -90,7 +105,6 @@ let g:airline#extensions#tabline#enabled = 1
 "cd ~/.vim/pack/tpope/start
 "git clone https://tpope.io/vim/fugitive.git
 "vim -u NONE -c "helptags fugitive/doc" -c q
-
 
 packloadall
 silent! helptags ALL
