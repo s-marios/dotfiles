@@ -20,17 +20,16 @@ let g:tex_fast="bcmprsSvV"
 """ mkdir -p ~/.vim/pack/git-plugins/start
 """ git clone --depth 1 https://github.com/dense-analysis/ale.git ~/.vim/pack/git-plugins/start/ale
 
-"completion, rust & python linters/fixers
-"\	'c': ['clangd', 'ccls', 'cc', 'cppcheck', 'flawfinder']
-"messing with clangd
-let g:ale_c_clangd_executable = "clangd-13"
+"enable completion
 let g:ale_completion_enabled = 1
 
-"disable lacheck because it detects $ inside lstlistings
+""" Disabled linter/fixers
+" disable lacheck because it detects $ inside lstlistings
 let g:ale_linters_ignore = {
 \	'tex': ['lacheck']
 \}
 
+""" LSP completion, c, rust, python linters/fixers
 let g:ale_linters = {
 \	'rust': ['analyzer', 'cargo'],
 \	'python': ['pyls', 'mypy', 'flake8'],
