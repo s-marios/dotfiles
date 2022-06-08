@@ -5,6 +5,7 @@ filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 autocmd BufRead *.c set cindent
+autocmd BufRead,BufNewFile *.h set filetype=c
 
 "hide buffers for easier navigation
 set hidden
