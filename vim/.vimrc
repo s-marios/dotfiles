@@ -47,8 +47,11 @@ let g:ale_fixers = {
 \	'c': ['astyle'],
 \	'*': ['trim_whitespace', 'remove_trailing_lines']
 \}
+
+""" Rust configuration
 let g:ale_rust_cargo_use_clippy = 1
 
+""" Python configuration
 "python yapf executable
 let g:ale_python_yapf_executable = 'yapf3'
 
@@ -56,10 +59,17 @@ let g:ale_python_yapf_executable = 'yapf3'
 let g:ale_python_flake8_options = '--hang-closing'
 let g:ale_python_autopep8_options = '--hang-closing'
 
+""" C configuration
+"remove global cc options and rely on our compile_commands.json
+let g:ale_c_cc_options = ''
+
+""" ALE general configuration
 "keep highlights from messing up code visibility, but still have gutter indicators
 let g:ale_set_highlights = 0
 
-"WIP get possible code actions
+"get possible code actions
+"note: this works but the cursor needs to be exactly where the code action is
+"applicable
 nmap gA <Plug>(ale_code_action)
 
 "call rustfmt as fixer/formatter
