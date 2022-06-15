@@ -33,14 +33,15 @@ let g:ale_linters_ignore = {
 let g:ale_linters = {
 \	'rust': ['analyzer', 'cargo'],
 \	'python': ['pyls', 'mypy', 'flake8'],
-\	'c': ['clangd', 'cc', 'cppcheck', 'flawfinder']
+\	'c': ['clangd', 'cc', 'cppcheck', 'flawfinder'],
+\	'java': ['javac', 'eclipselsp'],
 \}
 
 let g:ale_fixers = {
 \	'rust': ['rustfmt'],
 \	'python': ['isort', 'autopep8'],
 \	'c': ['astyle'],
-\	'*': ['trim_whitespace', 'remove_trailing_lines']
+\	'*': ['trim_whitespace', 'remove_trailing_lines'],
 \}
 
 """ Rust configuration
