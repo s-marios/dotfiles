@@ -35,12 +35,14 @@ let g:ale_linters = {
 \	'python': ['pyls', 'mypy', 'flake8'],
 \	'c': ['clangd', 'cc', 'cppcheck', 'flawfinder'],
 \	'java': ['javac', 'eclipselsp'],
+\	'lua': ['selene', 'luacheck', 'luac'],
 \}
 
 let g:ale_fixers = {
 \	'rust': ['rustfmt'],
 \	'python': ['isort', 'autopep8'],
 \	'c': ['astyle'],
+\	'lua': ['stylua'],
 \	'*': ['trim_whitespace', 'remove_trailing_lines'],
 \}
 
