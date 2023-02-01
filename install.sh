@@ -5,6 +5,7 @@ PWD=`pwd`
 # link things to places
 ln -s $PWD/vim/.vimrc ~/ || true
 ln -s $PWD/screen/.screenrc ~/ || true
+ln -s $PWD/tmux/.tmux.conf ~/ || true
 ln -s ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer ~/.cargo/bin/ || true
 
 # create plugin folder
