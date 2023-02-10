@@ -3,13 +3,20 @@
 PWD=`pwd`
 
 # link things to places
-ln -s $PWD/vim/.vimrc ~/ || true
-ln -s $PWD/screen/.screenrc ~/ || true
-ln -s $PWD/tmux/.tmux.conf ~/ || true
-ln -s ~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer ~/.cargo/bin/ || true
+ln -s $PWD/vim/.vimrc $HOME/ || true
+ln -s $PWD/screen/.screenrc $HOME/ || true
+ln -s $PWD/tmux/.tmux.conf $HOME/ || true
+ln -s $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer $HOME/.cargo/bin/ || true
+
+# create nvim config folder
+NVIM_CONFIG=$HOME/.config/nvim
+mkdir -p NVIM_CONFIG
+
+# link nvim config
+ln -s $PWD/nvim/init.lua $NVIM_CONFIG || true
 
 # create plugin folder
-GIT_PLUGINS=~/.vim/pack/git-plugins/start
+GIT_PLUGINS=$HOME/.vim/pack/git-plugins/start
 mkdir -p GIT_PLUGINS
 
 # clone repositories
