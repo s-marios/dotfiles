@@ -332,12 +332,15 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+-- Enable autoformatting on save for all files
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+
 -- Manually enable some LSP servers
-require('lspconfig').rust_analyzer.setup{
+require('lspconfig').rust_analyzer.setup {
   on_attach = on_attach,
 }
 
-require('lspconfig').clangd.setup{
+require('lspconfig').clangd.setup {
   on_attach = on_attach,
 }
 --require('lspconfig').sumneko_lua.setup{}
