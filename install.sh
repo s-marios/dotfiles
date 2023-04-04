@@ -10,14 +10,19 @@ ln -s $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyze
 
 # create nvim config folder
 NVIM_CONFIG=$HOME/.config/nvim
-mkdir -p NVIM_CONFIG
+mkdir -p $NVIM_CONFIG
 
 # link nvim config
 ln -s $PWD/nvim/init.lua $NVIM_CONFIG || true
 
+# create nvim color folder
+COLOR_FOLDER=$NVIM_CONFIG/colors
+mkdir -p $COLOR_FOLDER
+ln -s $PWD/nvim/colors/jello.vim $COLOR_FOLDER/jello.vim || true
+
 # create plugin folder
 GIT_PLUGINS=$HOME/.vim/pack/git-plugins/start
-mkdir -p GIT_PLUGINS
+mkdir -p $GIT_PLUGINS
 
 # clone repositories
 # ALE
