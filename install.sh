@@ -6,7 +6,6 @@ PWD=`pwd`
 ln -s $PWD/vim/.vimrc $HOME/ || true
 ln -s $PWD/screen/.screenrc $HOME/ || true
 ln -s $PWD/tmux/.tmux.conf $HOME/ || true
-ln -s $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/bin/rust-analyzer $HOME/.cargo/bin/ || true
 
 # create nvim config folder
 NVIM_CONFIG=$HOME/.config/nvim
