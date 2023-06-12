@@ -11,8 +11,15 @@ ln -s $PWD/tmux/.tmux.conf $HOME/ || true
 NVIM_CONFIG=$HOME/.config/nvim
 mkdir -p $NVIM_CONFIG
 
+# create nvim lua folder
+NVIM_CONFIG_LUA=$HOME/.config/nvim/lua
+mkdir -p $NVIM_CONFIG_LUA
+
 # link nvim config
 ln -s $PWD/nvim/init.lua $NVIM_CONFIG || true
+
+# link mtest config
+ln -s $PWD/nvim/mtest.lua $NVIM_CONFIG_LUA || true
 
 # create nvim color folder
 COLOR_FOLDER=$NVIM_CONFIG/colors
