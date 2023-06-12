@@ -200,8 +200,8 @@ vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<C-k>", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<C-j>", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
@@ -234,7 +234,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-  nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
+  nmap("<leader><C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
   -- Lesser used LSP functionality
   nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
@@ -356,6 +356,17 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "luasnip" },
   },
+})
+
+-- Marios: change the presentation of diagnostics
+-- prefer no virtual text, severity sorting and float with border
+vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true,
+  float = {
+    severity_sort = true,
+    border = "single",
+  }
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
