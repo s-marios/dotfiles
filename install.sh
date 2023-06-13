@@ -18,8 +18,8 @@ mkdir -p $NVIM_CONFIG_LUA
 # link nvim config
 ln -s $PWD/nvim/init.lua $NVIM_CONFIG || true
 
-# link mtest config
-ln -s $PWD/nvim/mtest.lua $NVIM_CONFIG_LUA || true
+# link mldiag config
+ln -s $PWD/nvim/mldiag.lua $NVIM_CONFIG_LUA || true
 
 # create nvim color folder
 COLOR_FOLDER=$NVIM_CONFIG/colors
