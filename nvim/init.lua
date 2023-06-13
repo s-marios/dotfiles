@@ -199,9 +199,17 @@ vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { de
 vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 
+local goto_next_no_float = function()
+  vim.diagnostic.goto_next({ float = false })
+end
+
+local goto_prev_no_float = function()
+  vim.diagnostic.goto_prev({ float = false })
+end
+
 -- Diagnostic keymaps
-vim.keymap.set("n", "<C-k>", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "<C-j>", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<C-k>", goto_prev_no_float)
+vim.keymap.set("n", "<C-j>", goto_next_no_float)
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
