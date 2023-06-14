@@ -22,9 +22,16 @@ local echo_diagnostics = function()
   end
 end
 
-vim.api.nvim_create_autocmd(
-  "CursorMoved",
-  {
-    pattern = "*",
-    callback = echo_diagnostics,
-  })
+local setup = function()
+  local group_id = vim.api.nvim_create_augroup("mldiag", {})
+
+  vim.api.nvim_create_autocmd(
+    "CursorMoved",
+    {
+      group = group_id,
+      pattern = "*",
+      callback = echo_diagnostics,
+    })
+end
+
+setup()
