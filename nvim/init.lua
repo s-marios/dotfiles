@@ -83,6 +83,9 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+-- before sleuth does anything..
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 
 -- Set highlight on search
 vim.o.hlsearch = false
