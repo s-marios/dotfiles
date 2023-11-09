@@ -16,7 +16,7 @@ AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortEnumsOnASingleLine: false
 AllowShortBlocksOnASingleLine: Never
 AllowShortCaseLabelsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: All
+AllowShortFunctionsOnASingleLine: Empty
 AllowShortLambdasOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
@@ -133,7 +133,7 @@ PenaltyIndentedWhitespace: 0
 PointerAlignment: Middle
 PPIndentWidth:   -1
 ReferenceAlignment: Right
-ReflowComments:  true
+ReflowComments:  false
 RemoveBracesLLVM: false
 SeparateDefinitionBlocks: Always
 ShortNamespaceLines: 1
@@ -157,7 +157,7 @@ SpaceBeforeParensOptions:
   AfterIfMacros:   true
   AfterOverloadedOperator: false
   BeforeNonEmptyParentheses: false
-SpaceAroundPointerQualifiers: Default
+SpaceAroundPointerQualifiers: Both
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceInEmptyBlock: false
 SpaceInEmptyParentheses: false
@@ -167,7 +167,7 @@ SpacesInConditionalStatement: false
 SpacesInContainerLiterals: true
 SpacesInCStyleCastParentheses: false
 SpacesInLineCommentPrefix:
-  Minimum:         1
+  Minimum:         0
   Maximum:         -1
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
@@ -189,4 +189,3 @@ WhitespaceSensitiveMacros:
   - NS_SWIFT_NAME
   - CF_SWIFT_NAME
 ...
-
