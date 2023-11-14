@@ -1,85 +1,102 @@
 -- this was taken from here: https://github.com/nvim-lua/kickstart.nvim
--- Install packer
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  is_bootstrap = true
-  vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-  vim.cmd([[packadd packer.nvim]])
+-- Install Lazy
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-require("packer").startup(function(use)
-  -- Package manager
-  use("wbthomason/packer.nvim")
+require("lazy").setup({
+  -- Git related plugins
+  "tpope/vim-fugitive",
+  "tpope/vim-sleuth",
 
-  use({
+  {
     -- LSP Configuration & Plugins
     "neovim/nvim-lspconfig",
-    requires = {
+    dependencies = {
       -- Marios: I don't want LSPs handled for me, to avoid version drifts
       -- Automatically install LSPs to stdpath for neovim
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
 
       -- Useful status updates for LSP
-      "j-hui/fidget.nvim",
+      {
+        "j-hui/fidget.nvim",
+        opts = {},
+      },
 
       -- Additional lua configuration, makes nvim stuff amazing
       "folke/neodev.nvim",
     },
-  })
+  },
 
-  use({
+  {
     -- Autocompletion
     "hrsh7th/nvim-cmp",
-    requires = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
-  })
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      --'rafamadriz/friendly-snippets', --TODO check this one? friendly snippets
+    },
+  },
+  { "folke/which-key.nvim",  opts = {} },
 
-  -- Git related plugins
-  use("tpope/vim-fugitive")
-  use("lewis6991/gitsigns.nvim")
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      signs = {
+        add = { text = "+" },
+        change = { text = "~" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+      },
+    }, --TODO there's some extensive customization for this one on the kickstart, check it out
+  },
 
-  use("nvim-lualine/lualine.nvim") -- Fancier statusline
-  use("numToStr/Comment.nvim")     -- "gc" to comment visual regions/lines
-  use("tpope/vim-sleuth")          -- Detect tabstop and shiftwidth automatically
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = "jellybeans",
+        component_separators = "|",
+        section_separators = "",
+      },
+    },
+  },
+
+  -- "gc" to comment visual regions/lines
+  { "numToStr/Comment.nvim", opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
-  use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
-
-  -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
-
-  -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-  local has_plugins, plugins = pcall(require, "custom.plugins")
-  if has_plugins then
-    plugins(use)
-  end
-
-  if is_bootstrap then
-    require("packer").sync()
-  end
-end)
-
--- When we are bootstrapping a configuration, it doesn't
--- make sense to execute the rest of the init.lua.
---
--- You'll need to restart nvim, and then it will work.
-if is_bootstrap then
-  print("==================================")
-  print("    Plugins are being installed")
-  print("    Wait until Packer completes,")
-  print("       then restart nvim")
-  print("==================================")
-  return
-end
-
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-  command = "source <afile> | silent! LspStop | silent! LspStart | PackerCompile",
-  group = packer_group,
-  pattern = vim.fn.expand("$MYVIMRC"),
-})
+  {
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        cond = function()
+          return vim.fn.executable("make") == 1
+        end,
+      },
+    },
+  },
+  --no treesitter, will do if needed
+}, {})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -96,6 +113,11 @@ vim.wo.number = false
 -- Enable mouse mode
 vim.o.mouse = "a"
 
+-- Sync clipboard between OS and Neovim.
+-- Remove this option if you want your OS clipboard to remain independent.
+-- See `:help 'clipboard'`
+vim.o.clipboard = "unnamedplus"
+
 -- Enable break indent
 vim.o.breakindent = true
 
@@ -108,6 +130,9 @@ vim.o.smartcase = true
 
 -- Decrease update time
 vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+
+-- Keep signcolumn on by default
 vim.wo.signcolumn = "yes"
 
 -- Set colorscheme
@@ -141,32 +166,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
   group = highlight_group,
   pattern = "*",
-})
-
--- Set lualine as statusline
--- See `:help lualine.txt`
-require("lualine").setup({
-  options = {
-    icons_enabled = false,
-    theme = "jellybeans",
-    component_separators = "|",
-    section_separators = "",
-  },
-})
-
--- Enable Comment.nvim
-require("Comment").setup()
-
--- Gitsigns
--- See `:help gitsigns.txt`
-require("gitsigns").setup({
-  signs = {
-    add = { text = "+" },
-    change = { text = "~" },
-    delete = { text = "_" },
-    topdelete = { text = "‾" },
-    changedelete = { text = "~" },
-  },
 })
 
 -- [[ Configure Telescope ]]
@@ -305,6 +304,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- Setup mason so it can manage external tooling
 require("mason").setup()
+require("mason-lspconfig").setup()
 
 -- Ensure the servers above are installed
 local mason_lspconfig = require("mason-lspconfig")
@@ -377,7 +377,7 @@ vim.diagnostic.config({
   float = {
     severity_sort = true,
     border = "single",
-  }
+  },
 })
 
 require("mldiag")
