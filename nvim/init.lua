@@ -22,6 +22,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  -- mldiag
+  "s-marios/mldiag",
   -- Git related plugins
   "tpope/vim-fugitive",
   "tpope/vim-sleuth",
@@ -381,8 +383,6 @@ vim.diagnostic.config({
     border = "single",
   },
 })
-
-require("mldiag")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
