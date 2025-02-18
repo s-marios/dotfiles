@@ -47,6 +47,11 @@ require("lazy").setup({
       "folke/neodev.nvim",
     },
   },
+  {
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
+    build = "make install_jsregexp",
+  },
 
   {
     -- Autocompletion
@@ -290,6 +295,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
+  basedpyright = {},
 
   lua_ls = {
     Lua = {
