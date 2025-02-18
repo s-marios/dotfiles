@@ -64,7 +64,10 @@ require("lazy").setup({
     },
   },
   { "folke/which-key.nvim",  opts = {} },
-
+  {
+    -- non-lsp linters
+    "mfussenegger/nvim-lint"
+  },
   {
     "lewis6991/gitsigns.nvim",
     opts = {
@@ -330,6 +333,18 @@ mason_lspconfig.setup_handlers({
       on_attach = on_attach,
       settings = servers[server_name],
     })
+  end,
+})
+
+-- declare linters based on filetype
+require("lint").linters_by_ft = {
+  c = { "clangtidy", "cppcheck" },
+}
+
+-- invoke linters after writing file
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
   end,
 })
 
