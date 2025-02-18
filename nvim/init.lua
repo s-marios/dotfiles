@@ -339,6 +339,7 @@ mason_lspconfig.setup_handlers({
 -- declare linters based on filetype
 require("lint").linters_by_ft = {
   c = { "clangtidy", "cppcheck", "flawfinder" },
+  sh = { "shellcheck" },
 }
 
 -- invoke linters after writing file
