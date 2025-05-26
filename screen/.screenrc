@@ -1,1 +1,2 @@
 bind / focus prev
+defscrollback 20000
