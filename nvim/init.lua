@@ -275,23 +275,8 @@ end
 -- Enable autoformatting on save for all files
 vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
 
--- Manually enable some LSP servers
-require("lspconfig").rust_analyzer.setup({
-  on_attach = on_attach,
-})
-
-require("lspconfig").clangd.setup({
-  on_attach = on_attach,
-})
-
--- Marios: these are all related to mason and mason-lspconfig.
--- Only keep it for the difficult-to-install servers. Everything else, enable it manuall
--- as above.
--- Enable the following language servers
--- Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-
--- Add any additional override configuration in the following tables. They will be passed to
--- the `settings` field of the server config. You must look up that documentation yourself.
+-- Consider removing this, it was used by Mason 1
+-- in setup_handlers but now not that relevant.
 local servers = {
   -- clangd = {},
   -- gopls = {},
@@ -324,17 +309,24 @@ local mason_lspconfig = require("mason-lspconfig")
 
 mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
+  automatic_enable = true,
 })
 
-mason_lspconfig.setup_handlers({
-  function(server_name)
-    require("lspconfig")[server_name].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    })
-  end,
+-- configuration for all lsp servers
+vim.lsp.config('*', {
+  capabilities = capabilities,
+  on_attach = on_attach,
 })
+
+-- Manually add the lua config
+vim.lsp.config.lua_ls.Lua = servers.lua_ls.Lua
+
+
+-- Enable local lsp servers manually
+-- (not handled by Mason)
+vim.lsp.enable('clangd')
+vim.lsp.enable('rust_analyzer')
+
 
 -- declare linters based on filetype
 require("lint").linters_by_ft = {
