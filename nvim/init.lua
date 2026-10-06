@@ -66,7 +66,7 @@ require("lazy").setup({
   { "folke/which-key.nvim",  opts = {} },
   {
     -- non-lsp linters
-    "mfussenegger/nvim-lint"
+    "mfussenegger/nvim-lint",
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -313,16 +313,15 @@ mason_lspconfig.setup({
 })
 
 -- configuration for all lsp servers
-vim.lsp.config('*', {
+vim.lsp.config("*", {
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- Enable local lsp servers manually
 -- (not handled by Mason)
-vim.lsp.enable('clangd')
-vim.lsp.enable('rust_analyzer')
-
+vim.lsp.enable("clangd")
+vim.lsp.enable("rust_analyzer")
 
 -- declare linters based on filetype
 require("lint").linters_by_ft = {
