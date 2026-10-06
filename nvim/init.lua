@@ -318,10 +318,6 @@ vim.lsp.config('*', {
   on_attach = on_attach,
 })
 
--- Manually add the lua config
-vim.lsp.config.lua_ls.Lua = servers.lua_ls.Lua
-
-
 -- Enable local lsp servers manually
 -- (not handled by Mason)
 vim.lsp.enable('clangd')
